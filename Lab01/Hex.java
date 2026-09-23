@@ -1,3 +1,4 @@
+package Lab01;
 public class Hex {
     public static void main(String[] args) {
         int number = 45;
