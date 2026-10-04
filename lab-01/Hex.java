@@ -1,10 +1,23 @@
-package Lab01;
+import java.math.BigInteger;
 
 public class Hex {
     public static void main(String[] args) {
-        String hexInput = args[0];
+        if (args.length == 0) {
+            System.err.println("Error: no hex value provided.");
+            System.exit(1);
+        }
 
-        int total = 0;
+        String hexInput = args[0];
+        for (int i = 0; i < hexInput.length(); i++) {
+            char c = hexInput.charAt(i);
+            boolean validDigit = (c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F');
+            if (!validDigit) {
+                System.err.println("Error: invalid hex character '" + c + "'.");
+                System.exit(1);
+            }
+        }
+
+        BigInteger total = BigInteger.ZERO;
         for (int i = 0; i < hexInput.length(); i++) {
             char c = hexInput.charAt(i);
             int value = 0;
@@ -14,7 +27,7 @@ public class Hex {
             if (c >= 'a' && c <= 'f') {
                 value = 10 + (c - 'a');
             }
-            total = total * 16 + value;
+            total = total.multiply(BigInteger.valueOf(16)).add(BigInteger.valueOf(value));
         }
         System.out.println(total);
     }
